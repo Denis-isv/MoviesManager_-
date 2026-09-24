@@ -13,27 +13,26 @@
                 Command="{Binding OnAddMovie}"/>
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding Movies}"
-          AutoGenerateColumns="False" CanUserAddRows="False"
-          RowEditEnding="MoviesGrid_RowEditEnding">
+                  AutoGenerateColumns="False" CanUserAddRows="False"
+                  IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
                 <DataGridTextColumn Header="Год" Binding="{Binding Year}" Width="Auto"/>
+                <DataGridTextColumn Header="Жанры" Binding="{Binding GenresDisplay}" Width="200"/>
                 <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="2*"/>
-
-                <DataGridTemplateColumn Header="Жанр" Width="150">
+                <DataGridTemplateColumn Header="Действия" Width="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Genre.Name}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Редактировать" Margin="2"
+                                        Command="{Binding DataContext.OnEditMovie, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"/>
+                                <Button Content="Удалить" Margin="2"
+                                        Command="{Binding DataContext.OnDeleteMovie, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"/>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding DataContext.Genres, RelativeSource={RelativeSource AncestorType=Page}}"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                              SelectedValue="{Binding GenreId, UpdateSourceTrigger=PropertyChanged}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>

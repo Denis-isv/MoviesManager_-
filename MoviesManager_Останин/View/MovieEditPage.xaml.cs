@@ -2,9 +2,9 @@
 
 namespace MoviesManager_Останин.View
 {
-    public partial class MoviesPage : Page
+    public partial class MovieEditPage : Page
     {
-        public MoviesPage(object Context)
+        public MovieEditPage(object Context)
         {
             InitializeComponent();
             DataContext = Context;

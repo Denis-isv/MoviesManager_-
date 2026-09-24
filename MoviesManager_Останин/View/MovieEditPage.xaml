@@ -1,0 +1,52 @@
+﻿<Page x:Class="MoviesManager_Останин.View.MovieEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Редактирование фильма">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Название:"/>
+            <TextBox Text="{Binding Movie.Title, UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Text="Год:"/>
+            <TextBox Text="{Binding Movie.Year, UpdateSourceTrigger=PropertyChanged}" Height="25"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Описание:"/>
+            <TextBox Text="{Binding Movie.Description, UpdateSourceTrigger=PropertyChanged}"
+                     Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,0,0,10">
+            <TextBlock Text="Жанры (можно выбрать несколько):" Margin="0,0,0,5"/>
+            <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding GenreSelections}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Genre.Name}"
+                                      IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                                      Margin="0,3"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Сохранить" Width="120" Height="30" Margin="0,0,10,0"
+                    Command="{Binding OnSave}"/>
+            <Button Content="Отмена" Width="120" Height="30"
+                    Command="{Binding OnCancel}"/>
+        </StackPanel>
+    </Grid>
+</Page>

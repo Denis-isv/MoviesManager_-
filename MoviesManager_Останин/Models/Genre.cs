@@ -1,6 +1,9 @@
-﻿namespace MoviesManager_Останин.Models
+﻿using MoviesManager_Останин.Classes;
+using System.Collections.Generic;
+
+namespace MoviesManager_Останин.Models
 {
-    public class Genre : Classes.Notification
+    public class Genre : Notification
     {
         public int Id { get; set; }
 
@@ -10,5 +13,7 @@
             get => name;
             set { name = value; OnPropertyChanged(); }
         }
+
+        public List<Movie> Movies { get; set; } = new List<Movie>();
     }
 }

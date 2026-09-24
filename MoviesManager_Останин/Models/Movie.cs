@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using MoviesManager_Останин.Classes;
+﻿using MoviesManager_Останин.Classes;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MoviesManager_Останин.Models
 {
@@ -28,13 +29,20 @@ namespace MoviesManager_Останин.Models
             set { description = value; OnPropertyChanged(); }
         }
 
-        public int GenreId { get; set; }
+        public List<Genre> Genres { get; set; } = new List<Genre>();
 
-        private Genre genre;
-        public Genre Genre
+        public string GenresDisplay
         {
-            get => genre;
-            set { genre = value; OnPropertyChanged(); }
+            get
+            {
+                if (Genres == null || Genres.Count == 0) return "—";
+                return string.Join(", ", Genres.Select(g => g.Name));
+            }
+        }
+
+        public void RefreshGenres()
+        {
+            OnPropertyChanged(nameof(GenresDisplay));
         }
     }
 }
