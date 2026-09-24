@@ -1,0 +1,22 @@
+﻿<Page x:Class="MoviesManager_Останин.View.GenresPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Жанры">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Добавить жанр" Width="150" Height="30"
+                HorizontalAlignment="Left" Margin="0,0,0,10"
+                Command="{Binding OnAddGenre}"/>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Genres}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название жанра" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
